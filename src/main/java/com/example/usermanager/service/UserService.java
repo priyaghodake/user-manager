@@ -3,17 +3,21 @@ package com.example.usermanager.service;
 import com.example.usermanager.dto.UserDTO;
 import com.example.usermanager.model.User;
 import com.example.usermanager.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
